@@ -1,0 +1,40 @@
+.App {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid;
+}
+
+.Header {
+    border: 1px solid;
+    padding: 10px;
+    float: left;
+    width: 100%;
+}
+
+.Main {
+    clear: both;
+    padding: 10px;
+}
+
+.Logo {
+    float: left;
+    width: 30%;
+}
+
+.Content,
+.Menu {
+    float: left;
+    width: 70%;
+}
+
+.Footer {
+    clear: both;
+    border: 1px solid;
+    padding: 10px;
+}
+
+li {
+    list-style: none;
+    margin: 0px 10px;
+    float: left;
+}
