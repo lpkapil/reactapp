@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
+import store from '../store';
 
 const layout = {
   labelCol: {
@@ -21,6 +22,7 @@ const tailLayout = {
 class Login extends React.Component {
 
   onFinish = (values) => {
+    
     console.log('Success:', values);
 
     axios.post(
@@ -30,11 +32,31 @@ class Login extends React.Component {
         password: values.password
       }))
       .then(res => {
-        console.log(res);
-        console.log(res.data);
+
+        //update redux state
+        store.dispatch({type: 'LOGIN', value: true, token: res.data.token});
+
+        //store in localstorage
+        localStorage.setItem("login", true);
+        localStorage.setItem("token", res.data.token);
+
+        //redirect to dashboard
+
+        //logging
+        // console.log(res);
+        // console.log(res.data);
+
     }, (error) => {
-      console.log('In error');
-      console.log(error.response.data);
+      //update redux state
+      // store.dispatch({type: 'LOGIN', value: false, token: null});
+
+      //store in localstorage
+      // localStorage.setItem("login", false);
+      // localStorage.setItem("token", null);
+
+      //logging
+      // console.log('In error');
+      // console.log(error.response.data);
     });
   };
 

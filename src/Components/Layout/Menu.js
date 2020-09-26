@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import store from '../../store';
 
 
 class Menu extends React.Component {
+
   render() {
     return (
       <div className="Menu">
@@ -14,7 +16,7 @@ class Menu extends React.Component {
                 <Link to="/login">Login</Link>
               </li>
               <li>
-                <Link to="/register">Register</Link>
+                <Link to="/dashboard">Register</Link>
               </li>
               <li>
                 <Link to="/dashboard">Dashboard</Link>
