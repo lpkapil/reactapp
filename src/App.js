@@ -3,11 +3,12 @@ import 'antd/dist/antd.css';
 import './App.css';
 import { BrowserRouter as Router} from 'react-router-dom';
 import { connect } from 'react-redux';
-// import store from './store';
+import store from './store';
 
-import Header from './Components/Layout/Header';
-import Footer from './Components/Layout/Footer';
-import Main from './Components/Layout/Main';
+
+import Header from './components/Layout/Header';
+import Footer from './components/Layout/Footer';
+import Main from './components/Layout/Main';
 
 const mapStateToProps = (state, ownProps) => ({
   // ... computed data from state and optionally ownProps
@@ -20,18 +21,23 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 class App extends React.Component {
 
-  // constructor(props)
-  // {
-  //   super(props);
-  //   console.log('accessing store state');
-  //   console.log(store.getState());
-  // }
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      login: this.parseState(store.getState().login)
+    }
+  }
+
+  parseState = (input) => {
+		return typeof input == 'string' ? JSON.parse(input) : input;
+  }
 
   render() {
     return (
       <div className="App">
       <Router>
-        <Header />
+        <Header login={this.state.login} />
         <Main />
         <Footer />
       </Router>

@@ -6,11 +6,9 @@
  */
 
 export const login = {
-    type: 'LOGIN',
-    value: true
+    type: 'LOGIN'
 };
 
 export const logout = {
-    type: 'LOGOUT',
-    value: false
+    type: 'LOGOUT'
 };
