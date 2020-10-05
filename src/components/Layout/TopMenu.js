@@ -1,9 +1,10 @@
 import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
-import { Menu } from 'antd';
-import { AppstoreOutlined, LoginOutlined } from '@ant-design/icons';
-
+import { Menu, Modal } from 'antd';
+import { AppstoreOutlined, LoginOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import store from '../../store';
+
+const { confirm } = Modal;
 
 class TopMenu extends React.Component {
 
@@ -23,7 +24,19 @@ class TopMenu extends React.Component {
 
 	parseState = (input) => {
 		return typeof input == 'string' ? JSON.parse(input) : input;
-	}
+  }
+  
+  handleLogout = e => {
+    confirm({
+      title: 'Are you sure?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'When clicked the OK button, You will be logged out.',
+      onOk() {
+        window.location.href = '/logout';
+      },
+      onCancel() {},
+    });
+  };
 
 
   render() {
@@ -37,7 +50,9 @@ class TopMenu extends React.Component {
               <Link to="/dashboard">Dashboard</Link>
             </Menu.Item>
             <Menu.Item key="logout">
-              <Link to="/logout">Logout</Link>
+              <a href="#" onClick={this.handleLogout}>
+                Logout
+              </a>
             </Menu.Item>
         </Fragment>
       );

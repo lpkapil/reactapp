@@ -28,7 +28,7 @@ body,
     float: left;
     width: auto;
     padding: 10px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
 }
 
 .Content {
