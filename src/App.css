@@ -12,10 +12,11 @@ body,
 }
 
 .Header {
-    border: 1px solid;
+    border: 1px solid #ccc;
     padding: 10px;
     float: left;
     width: 100%;
+    background: #fbfbfb;
 }
 
 .Main {
@@ -33,6 +34,12 @@ body,
 .Content {
     float: left;
     width: 100%;
+    min-height: 475px;
+    height: 100%;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 10px;
 }
 
 .Menu {
@@ -42,12 +49,9 @@ body,
 
 .Footer {
     clear: both;
-    border: 1px solid;
+    border: 1px solid #ccc;
     padding: 10px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    background: #fbfbfb;
 }
 
 li {

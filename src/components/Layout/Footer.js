@@ -1,10 +1,11 @@
 import React from 'react';
+import { ShopTwoTone } from '@ant-design/icons';
 
 class Footer extends React.Component {
   render() {
     return (
       <div className="Footer">
-      <p>{this.props.appName} Copyright &copy; 2020</p>
+      <p><ShopTwoTone /> {this.props.appName} Copyright &copy; 2020</p>
       </div>
     )
   }

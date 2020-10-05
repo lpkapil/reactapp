@@ -4,7 +4,6 @@ import PageHeaderCommon from '../components/Layout/PageHeaderCommon';
 import axios from 'axios';
 import qs from 'qs';
 import store from '../store';
-import { SmileOutlined } from '@ant-design/icons';
 
 const layout = {
   labelCol: {
@@ -56,7 +55,7 @@ class Login extends React.Component {
       .then(res => {
 
         this.setState({ loading: '' });
-
+        
         //update redux state
         store.dispatch({type: 'LOGIN', value: true, token: res.data.token});
 
@@ -72,7 +71,7 @@ class Login extends React.Component {
 
         console.log('After login history object');
         console.log(this.props.history);
-
+        
         window.location.href = '/dashboard';
 
         // this.props.history.push("/dashboard");
@@ -86,11 +85,10 @@ class Login extends React.Component {
     }, (error) => {
       this.setState({ loading: '' });
       console.log(error.response.data.message);
-      notification.open({
+      notification.error({
         message: 'Error',
         description:
-          error.response.data.message,
-        icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+          error.response.data.message
       });
       //update redux state
       // store.dispatch({type: 'LOGIN', value: false, token: null});

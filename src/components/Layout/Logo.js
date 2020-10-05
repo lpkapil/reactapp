@@ -1,10 +1,10 @@
 import React from 'react';
-import { SmileTwoTone } from '@ant-design/icons';
+import { ShopTwoTone } from '@ant-design/icons';
 
 class Logo extends React.Component {
   render() {
     return (
-      <div className="Logo"><SmileTwoTone /> {this.props.appName}</div>
+      <div className="Logo"><ShopTwoTone /> {this.props.appName}</div>
     )
   }
 }

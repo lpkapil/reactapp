@@ -51,11 +51,10 @@ class Register extends React.Component {
       })
       .then(res => {
         this.setState({ loading: '' });
-        notification.open({
+        notification.success({
           message: 'Success',
           description:
-            res.data.message,
-          icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+            res.data.message
         });
         console.log(res);
         console.log(res.data);
@@ -66,11 +65,10 @@ class Register extends React.Component {
 
       }, (error) => {
         this.setState({ loading: '' });
-        notification.open({
+        notification.error({
           message: 'Error',
           description:
-            error.response.data.email,
-          icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+            error.response.data.email
         });
         console.log(error.response.data.email);
         console.log('In error');
