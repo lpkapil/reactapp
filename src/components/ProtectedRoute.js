@@ -23,7 +23,7 @@ class ProtectedRoute extends React.Component {
 		<Route 
 		  {...props} 
 		  render={props => (
-			(this.state.login == true) ?
+			(this.state.login === true) ?
 			  <Component {...props} /> :
 			  <Redirect to='/login' />
 		  )} 

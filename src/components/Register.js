@@ -54,6 +54,7 @@ class Register extends React.Component {
         
         //Reset form
         this.formRef.current.resetFields();
+        this.props.history.push("/login");
 
       }, (error) => {
         alert(error.response.data.email);

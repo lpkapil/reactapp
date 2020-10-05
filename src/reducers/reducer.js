@@ -7,7 +7,7 @@
 
 const initialState = {
     login: localStorage.getItem('login') ?? false,
-    token: localStorage.getItem('token') ?? null 
+    token: localStorage.getItem('token') ?? null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 login: action.value,
                 token: action.token
-            }   
+            }
       default:
         return state
     }

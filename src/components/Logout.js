@@ -10,6 +10,7 @@ class Logout extends React.Component {
       store.dispatch({type: 'LOGOUT', value: false, token: null});
       localStorage.removeItem("login");
       localStorage.removeItem("token");
+      window.location.href = '/';
   }   
   render() {
     return(

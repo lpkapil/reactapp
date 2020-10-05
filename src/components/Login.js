@@ -20,15 +20,7 @@ const tailLayout = {
 };
 
 class Login extends React.Component {
-
-  constructor(props)
-  {
-    super(props);
-    this.state = {
-
-    }
-  }
-
+  
   onFinish = (values) => {
     
     console.log('Success:', values);
@@ -57,7 +49,9 @@ class Login extends React.Component {
         console.log('After login history object');
         console.log(this.props.history);
 
-        this.props.history.push("/dashboard");
+        window.location.href = '/dashboard';
+
+        // this.props.history.push("/dashboard");
         
 
         //redirect to dashboard
