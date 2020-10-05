@@ -1,20 +1,12 @@
 import React from 'react';
 import PageHeaderCommon from '../components/Layout/PageHeaderCommon';
-import { Button, notification, Modal, Space, Divider } from 'antd';
-import { SmileOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { Button, Modal, Divider } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import UserListing from './UserListing';
 
 const { confirm } = Modal;
 
 class Dashboard extends React.Component {
-
-  openNotification = () => {
-    notification.open({
-      message: 'Notification Title',
-      description:
-        'This is the content of the notification. ',
-      icon: <SmileOutlined style={{ color: '#108ee9' }} />,
-    });
-  };
 
   showPromiseConfirm() {
     confirm({
@@ -34,14 +26,10 @@ class Dashboard extends React.Component {
     return (
       <div className="Dashboard">
         <PageHeaderCommon title="Dashboard" subTitle="Dashboard page UI elements demo" />
-        <Divider orientation="left" plain>Toast Notification</Divider>
-        <Button type="primary" onClick={this.openNotification}>
-          Open
-        </Button>
         <Divider orientation="left" plain>Model With promise</Divider>
-        <Space>
         <Button onClick={this.showPromiseConfirm}>Open</Button>
-        </Space>
+        <Divider orientation="left" plain>Server Side Table</Divider>
+        <UserListing />
       </div>
     )
   }

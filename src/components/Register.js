@@ -3,7 +3,6 @@ import { Form, Input, Button, Row, Col, Card, notification } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import PageHeaderCommon from '../components/Layout/PageHeaderCommon';
-import { SmileOutlined } from '@ant-design/icons';
 
 const layout = {
   labelCol: {

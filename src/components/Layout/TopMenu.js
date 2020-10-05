@@ -1,11 +1,9 @@
 import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
-import { AppstoreOutlined, LoginOutlined, SettingOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, LoginOutlined } from '@ant-design/icons';
 
 import store from '../../store';
-
-const { SubMenu } = Menu;
 
 class TopMenu extends React.Component {
 

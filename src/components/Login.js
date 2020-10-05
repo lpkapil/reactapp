@@ -20,17 +20,6 @@ const tailLayout = {
   },
 };
 
-const routes = [
-  {
-    path: '',
-    breadcrumbName: 'Home',
-  },
-  {
-    path: 'login',
-    breadcrumbName: 'Login',
-  },
-];
-
 class Login extends React.Component {
 
   constructor(props)
