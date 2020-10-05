@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { SmileTwoTone } from '@ant-design/icons';
 
 class Logo extends React.Component {
   render() {
     return (
-      <div className="Logo">
-        <Link to="/">Logo</Link>
-      </div>
+      <div className="Logo"><SmileTwoTone /> {this.props.appName}</div>
     )
   }
 }

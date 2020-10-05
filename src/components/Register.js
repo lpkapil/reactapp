@@ -1,7 +1,9 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Row, Col, Card, notification } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
+import PageHeaderCommon from '../components/Layout/PageHeaderCommon';
+import { SmileOutlined } from '@ant-design/icons';
 
 const layout = {
   labelCol: {
@@ -24,7 +26,8 @@ class Register extends React.Component {
     super(props);
     this.state = {  
       message: '',
-      showMessage: false 
+      showMessage: false,
+      loading: '' 
     } 
   }
 
@@ -32,7 +35,7 @@ class Register extends React.Component {
 
   onFinish = (values) => {
     console.log('Success:', values);
-
+    this.setState({ loading: 'loading' });
     axios.post(
       'http://lumenauthapp.com/api/register', 
       qs.stringify({ 
@@ -47,17 +50,29 @@ class Register extends React.Component {
         }
       })
       .then(res => {
+        this.setState({ loading: '' });
+        notification.open({
+          message: 'Success',
+          description:
+            res.data.message,
+          icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+        });
         console.log(res);
         console.log(res.data);
-        
-        alert(res.data.message);
         
         //Reset form
         this.formRef.current.resetFields();
         this.props.history.push("/login");
 
       }, (error) => {
-        alert(error.response.data.email);
+        this.setState({ loading: '' });
+        notification.open({
+          message: 'Error',
+          description:
+            error.response.data.email,
+          icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+        });
+        console.log(error.response.data.email);
         console.log('In error');
         console.log(error.response.data);
     });
@@ -69,6 +84,12 @@ class Register extends React.Component {
 
   render() {
     return(
+      <div>
+      <PageHeaderCommon title="Register" subTitle="Register page" />
+      <Row gutter={[16, 16]}>
+      <Col span={8}></Col>
+      <Col span={8}>
+        <Card style={{ width: 400 }}>
       <Form
       {...layout}
       name="basic"
@@ -128,6 +149,10 @@ class Register extends React.Component {
         </Button>
       </Form.Item>
     </Form>
+    </Card>
+    </Col>
+    </Row>
+    </div>
     )
   }
 }

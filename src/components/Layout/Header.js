@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu from './Menu';
+import TopMenu from './TopMenu';
 import Logo from './Logo';
 
 class Header extends React.Component {
@@ -7,8 +7,8 @@ class Header extends React.Component {
   render() {
     return (
       <div className="Header">
-          <Logo />
-          <Menu />
+          <Logo appName={this.props.appName} />
+          <TopMenu />
       </div>
     )
   }

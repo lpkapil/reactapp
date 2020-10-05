@@ -1,8 +1,10 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Row, Col, Card, notification } from 'antd';
+import PageHeaderCommon from '../components/Layout/PageHeaderCommon';
 import axios from 'axios';
 import qs from 'qs';
 import store from '../store';
+import { SmileOutlined } from '@ant-design/icons';
 
 const layout = {
   labelCol: {
@@ -19,10 +21,30 @@ const tailLayout = {
   },
 };
 
+const routes = [
+  {
+    path: '',
+    breadcrumbName: 'Home',
+  },
+  {
+    path: 'login',
+    breadcrumbName: 'Login',
+  },
+];
+
 class Login extends React.Component {
+
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      loading: ''
+    }
+  }
   
   onFinish = (values) => {
     
+    this.setState({ loading: 'loading' });
     console.log('Success:', values);
 
     axios.post(
@@ -32,6 +54,8 @@ class Login extends React.Component {
         password: values.password
       }))
       .then(res => {
+
+        this.setState({ loading: '' });
 
         //update redux state
         store.dispatch({type: 'LOGIN', value: true, token: res.data.token});
@@ -60,7 +84,14 @@ class Login extends React.Component {
         // console.log(res.data);
 
     }, (error) => {
-      alert(error.response.data.message);
+      this.setState({ loading: '' });
+      console.log(error.response.data.message);
+      notification.open({
+        message: 'Error',
+        description:
+          error.response.data.message,
+        icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+      });
       //update redux state
       // store.dispatch({type: 'LOGIN', value: false, token: null});
 
@@ -80,52 +111,63 @@ class Login extends React.Component {
 
   render() {
     return(
-      <Form
-      {...layout}
-      name="basic"
-      initialValues={{
-        remember: true,
-        size: 'small',
-      }}
-      onFinish={this.onFinish}
-      onFinishFailed={this.onFinishFailed}
-    >
-      <Form.Item
-        label="Email"
-        name="email"
-        rules={[
-          {
-            required: true,
-            message: 'Email is required.'
-          },
-          {
-            type: 'email',
-            message: 'Please enter a valid email.'
-          }
-        ]}
-      >
-        <Input />
-      </Form.Item>
+      <div>
+      <PageHeaderCommon title="Login" subTitle="Login page" />
+      <Row gutter={[16, 16]}>
+      <Col span={8}></Col>
+      <Col span={8}>
+        <Card style={{ width: 400 }}>
+          <Form
+            {...layout}
+            name="basic"
+            initialValues={{
+              remember: true,
+              size: 'small',
+            }}
+            onFinish={this.onFinish}
+            onFinishFailed={this.onFinishFailed}
+          >
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: 'Email is required.'
+                },
+                {
+                  type: 'email',
+                  message: 'Please enter a valid email.'
+                }
+              ]}
+            >
+              <Input />
+            </Form.Item>
 
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: 'Password is required.'
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: 'Password is required.'
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
 
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Login
-        </Button>
-      </Form.Item>
-    </Form>
+            <Form.Item {...tailLayout}>
+              <Button type="primary" htmlType="submit" loading={this.state.loading}>
+                Login
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
+      </Col>
+      <Col span={8}></Col>
+    </Row>
+    </div>
     )
   }
 }
