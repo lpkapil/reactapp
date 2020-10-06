@@ -1,9 +1,11 @@
 import React from 'react';
-import { Table, Input, Button, Space } from 'antd';
+import { Table, Input, Button, Space, Modal } from 'antd';
 import axios from 'axios';
 import store from '../store';
 import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+
+const { confirm } = Modal;
 
 class UserListing extends React.Component {
 
@@ -114,8 +116,6 @@ class UserListing extends React.Component {
       };
 
     fetch = (params = {}) => {
-        console.log('inside fetch');
-        console.log(this.state);
         this.setState({ loading: true });
         axios.get('http://lumenauthapp.com/api/users',
         {
@@ -139,6 +139,18 @@ class UserListing extends React.Component {
         });
     };
 
+    deleteHandler = (id) => {
+      confirm({
+        title: 'Are you sure?',
+        icon: <ExclamationCircleOutlined />,
+        content: 'When clicked the OK button, User with id ' + id + ' will be deleted.',
+        onOk() {
+          console.log('Delete user async ajax call');
+        },
+        onCancel() {},
+      });
+    }
+
     render() {
         const { data, pagination, loading } = this.state;
         const columns = [
@@ -148,7 +160,6 @@ class UserListing extends React.Component {
             key: 'id',
             sorter: true,
             width: '20%',
-            ...this.getColumnSearchProps('id'),
           },
           {
             title: 'Name',
@@ -172,8 +183,10 @@ class UserListing extends React.Component {
             ...this.getColumnSearchProps('email'),
           },
           {
-            title: 'Created At',
-            dataIndex: 'created_at',
+            title: 'Action',
+            dataIndex: '',
+            key: 'x',
+            render: (record) => <Button type="link" onClick={this.deleteHandler.bind(this, record.id)}>Delete</Button>,
           },
         ];
         return (
@@ -185,6 +198,14 @@ class UserListing extends React.Component {
                 pagination={pagination}
                 loading={loading}
                 onChange={this.handleTableChange}
+                expandable={{
+                  expandedRowRender: record => 
+                  <p style={{ margin: 0 }}>
+                    {`Created at: ${record.created_at}
+                    Updated at: ${record.updated_at}`}
+                  </p>,
+                  rowExpandable: record => record.name !== 'Not Expandable',
+                }}
             />
             </div>
         )

@@ -1,5 +1,17 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Completed Modules
+
+- User Login
+- User Registration
+- User Dashboard
+- Users Table Listing/Sorting/Search with Server Side Pagination
+
+## To do
+
+- JWT Auth token expire, Logout notification or refresh token
+- Refactor and improvements
+
 ## Available Scripts
 
 In the project directory, you can run:
