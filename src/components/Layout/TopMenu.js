@@ -1,10 +1,11 @@
 import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Modal, Button } from 'antd';
-import { HomeOutlined, LoginOutlined, ExclamationCircleOutlined, DashboardOutlined } from '@ant-design/icons';
+import { HomeOutlined, LoginOutlined, ExclamationCircleOutlined, DashboardOutlined, UserOutlined } from '@ant-design/icons';
 import store from '../../store';
 
 const { confirm } = Modal;
+const { SubMenu } = Menu;
 
 class TopMenu extends React.Component {
 
@@ -49,12 +50,13 @@ class TopMenu extends React.Component {
             <Menu.Item key="myaccount" icon={<DashboardOutlined />}>
               <Link to="/dashboard">Dashboard</Link>
             </Menu.Item>
-            <Menu.Item key="logout" icon={<LoginOutlined />}>
-              {this.state.user.name}
-              <Button type="link" onClick={this.handleLogout}>
-                Logout
-              </Button>
-            </Menu.Item>
+            <SubMenu key="SubMenu" icon={<UserOutlined />} title={this.state.user.name}>
+              <Menu.Item key="logout" icon={<LoginOutlined />}>
+                <Button type="link" onClick={this.handleLogout}>
+                  Logout
+                </Button>
+              </Menu.Item> 
+            </SubMenu>
         </Fragment>
       );
     } else{
