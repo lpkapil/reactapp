@@ -1,34 +1,29 @@
 import React from 'react';
 import PageHeaderCommon from '../components/Layout/PageHeaderCommon';
-import { Modal, Divider } from 'antd';
-// import { Button } from 'antd';
-// import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { Divider } from 'antd';
 import UserListing from './UserListing';
-
-const { confirm } = Modal;
+import store from '../store';
 
 class Dashboard extends React.Component {
 
-  // showPromiseConfirm() {
-  //   confirm({
-  //     title: 'This is test conform modal?',
-  //     icon: <ExclamationCircleOutlined />,
-  //     content: 'This is test modal message content',
-  //     onOk() {
-  //       return new Promise((resolve, reject) => {
-  //         setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-  //       }).catch(() => console.log('Oops errors!'));
-  //     },
-  //     onCancel() {},
-  //   });
-  // }
+  constructor(props)
+	{
+		super(props);
+		this.state = {
+      user: this.parseState(store.getState().user)
+    }
+  }
+
+  parseState = (input) => {
+		return typeof input == 'string' ? JSON.parse(input) : input;
+  }
 
   render() {
     return (
       <div className="Dashboard">
-        <PageHeaderCommon title="Dashboard" subTitle="Dashboard page UI elements demo" />
-        {/* <Divider orientation="left" plain>Model With promise</Divider>
-        <Button onClick={this.showPromiseConfirm}>Open</Button> */}
+        <PageHeaderCommon title="Dashboard" subTitle="Dashboard page" />
+        <Divider orientation="left" plain>Logged in User Object</Divider>
+        <div><pre>{JSON.stringify(this.state.user, null, 2) }</pre></div>
         <Divider orientation="left" plain>Server Side Table</Divider>
         <UserListing />
       </div>

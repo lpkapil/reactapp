@@ -5,7 +5,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
-// import { login, logout } from './actions/actions';
 import store from './store';
 
 
@@ -14,10 +13,7 @@ import store from './store';
  * Logging to see how things work
  */
 
-console.log('Initital store state');
-console.log(store.getState());
-
-console.log('Subscribe to store state change');
+// console.log('Subscribe to store state change');
 store.subscribe(() => {
   console.log('Store state changed');
   console.log(store.getState());

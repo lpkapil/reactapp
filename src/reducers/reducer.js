@@ -8,6 +8,7 @@
 const initialState = {
     login: localStorage.getItem('login') ?? false,
     token: localStorage.getItem('token') ?? null,
+    user: localStorage.getItem('user') ?? null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -16,13 +17,15 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 login: action.value,
-                token: action.token
+                token: action.token,
+                user: action.user
             }
         case 'LOGOUT':
             return {
                 ...state,
                 login: action.value,
-                token: action.token
+                token: action.token,
+                user: action.user
             }
       default:
         return state

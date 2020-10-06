@@ -46,30 +46,24 @@ class Login extends React.Component {
         this.setState({ loading: '' });
         
         //update redux state
-        store.dispatch({type: 'LOGIN', value: true, token: res.data.token});
+        store.dispatch({type: 'LOGIN', value: true, token: res.data.token, user: res.data.user});
 
         //store in localstorage
         localStorage.setItem("login", true);
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
 
         this.setState({
           login: true,
           token: res.data.token
         });
-
-
-        console.log('After login history object');
-        console.log(this.props.history);
         
+
+        console.log(res.data.user);
         window.location.href = '/dashboard';
 
         // this.props.history.push("/dashboard");
         
-
-        //redirect to dashboard
-        //logging
-        // console.log(res);
-        // console.log(res.data);
 
     }, (error) => {
       this.setState({ loading: '' });

@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Modal } from 'antd';
-import { AppstoreOutlined, LoginOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { Menu, Modal, Button } from 'antd';
+import { HomeOutlined, LoginOutlined, ExclamationCircleOutlined, DashboardOutlined } from '@ant-design/icons';
 import store from '../../store';
 
 const { confirm } = Modal;
@@ -13,12 +13,12 @@ class TopMenu extends React.Component {
 		super(props);
 		this.state = {
       login: this.parseState(store.getState().login),
+      user: this.parseState(store.getState().user),
       current: 'mail',
 		}
   }
   
   handleClick = e => {
-    console.log('click ', e);
     this.setState({ current: e.key });
   };
 
@@ -46,13 +46,14 @@ class TopMenu extends React.Component {
     if (this.state.login === true) {
       var links = (
         <Fragment>
-            <Menu.Item key="myaccount">
+            <Menu.Item key="myaccount" icon={<DashboardOutlined />}>
               <Link to="/dashboard">Dashboard</Link>
             </Menu.Item>
-            <Menu.Item key="logout">
-              <a href="#" onClick={this.handleLogout}>
+            <Menu.Item key="logout" icon={<LoginOutlined />}>
+              {this.state.user.name}
+              <Button type="link" onClick={this.handleLogout}>
                 Logout
-              </a>
+              </Button>
             </Menu.Item>
         </Fragment>
       );
@@ -72,7 +73,7 @@ class TopMenu extends React.Component {
     return (
       <div className="Menu" >
         <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
-          <Menu.Item key="home" icon={<AppstoreOutlined />}>
+          <Menu.Item key="home" icon={<HomeOutlined />}>
             <Link to="/">Home</Link>
           </Menu.Item>
           { links }
