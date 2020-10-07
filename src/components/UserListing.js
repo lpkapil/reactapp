@@ -20,8 +20,13 @@ class UserListing extends React.Component {
             loading: false,
             searchText: '',
             searchedColumn: '',
-            token: store.getState().token
+            token: store.getState().token,
+            user: this.parseState(store.getState().user)
         };
+    }
+
+    parseState = (input) => {
+      return typeof input == 'string' ? JSON.parse(input) : input;
     }
 
     
@@ -136,7 +141,32 @@ class UserListing extends React.Component {
               // total: data.totalCount,
             },
           });
-        });
+        }, (error) => {
+          this.setState({ loading: false });
+          console.log('token expired, refresh token or logout');
+          // To-do ask user to stay logged in for sepecific days
+          // It can be placed on login form
+          console.log(error.response);
+
+          let secondsToGo = 5;
+          const modal = Modal.warning({
+            title: 'Your login session has been expired',
+            content: `You will be logout after ${secondsToGo} seconds.`,
+          });
+          const timer = setInterval(() => {
+            secondsToGo -= 1;
+            modal.update({
+              content: `You will be logout after ${secondsToGo} seconds.`,
+            });
+          }, 1000);
+          setTimeout(() => {
+            clearInterval(timer);
+            modal.destroy();
+            window.location.href = '/logout';
+          }, secondsToGo * 1000);
+
+          
+      });
     };
 
     deleteHandler = (id) => {
