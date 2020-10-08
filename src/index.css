@@ -7,6 +7,70 @@ body {
     height: 100%;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+.App {
+    background: #fff;
+    padding: 10px;
+    height: 100%;
+}
+
+html,
+body,
+#root,
+#root>div {
+    height: 100%
+}
+
+.Header {
+    border: 1px solid #ccc;
+    padding: 10px;
+    float: left;
+    width: 100%;
+    background: #fbfbfb;
+}
+
+.Main {
+    clear: both;
+    width: 100%;
+    min-height: 475px;
+    height: auto;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+}
+
+.Logo {
+    float: left;
+    width: auto;
+    padding: 10px;
+}
+
+.Menu {
+    float: right;
+    width: auto;
+}
+
+.Footer {
+    clear: both;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: #fbfbfb;
+}
+
+li {
+    list-style: none;
+    margin: 0px 10px;
+    float: left;
+}
+
+a {
+    text-decoration: none;
+}
+
+.ant-menu {
+    background: none;
+}
+
+.site-page-header {
+    border: 1px solid rgb(235, 237, 240);
 }

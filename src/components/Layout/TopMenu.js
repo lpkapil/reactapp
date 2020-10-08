@@ -2,10 +2,35 @@ import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Modal, Button } from 'antd';
 import { HomeOutlined, LoginOutlined, ExclamationCircleOutlined, DashboardOutlined, UserOutlined } from '@ant-design/icons';
-import store from '../../store';
+import store from '../../redux/store';
+import { connect } from 'react-redux';
 
 const { confirm } = Modal;
 const { SubMenu } = Menu;
+
+// const mapStateToProps = (state, ownProps) => ({
+//   // ... computed data from state and optionally ownProps
+  
+// });
+
+// const mapDispatchToProps = (dispatch, ownProps) => ({
+//   // ... normally is an object full of action creators
+// });
+
+function mapStateToProps(state) {
+  //This function gets State from Redux Store
+  // Equal to store.getState()
+  // We can return an object, which will be props of the connected class component
+
+  console.log('inside mapStatetoProps');
+  console.log(state);
+  return {'storestate': state};
+}
+function mapDispatchToProps(dispatch) {
+  console.log('inside mapDispatchToProps');
+  console.log(dispatch);
+  return {};
+}
 
 class TopMenu extends React.Component {
 
@@ -16,7 +41,10 @@ class TopMenu extends React.Component {
       login: this.parseState(store.getState().login),
       user: this.parseState(store.getState().user),
       current: 'mail',
-		}
+    };
+    console.log('Topmenu consturctor props');
+    console.log('Props set in mapStateToProps are available here to use');
+    console.log(this.props);
   }
   
   handleClick = e => {
@@ -27,7 +55,9 @@ class TopMenu extends React.Component {
 		return typeof input == 'string' ? JSON.parse(input) : input;
   }
   
-  handleLogout = e => {
+  handleLogout = () => {
+    // this won't be accessible in confirm so make it's reference 
+    let self = this;
     confirm({
       title: 'Are you sure?',
       icon: <ExclamationCircleOutlined />,
@@ -35,7 +65,10 @@ class TopMenu extends React.Component {
       onOk() {
         window.location.href = '/logout';
       },
-      onCancel() {},
+      onCancel() {
+        console.log('Test sending data to parent component using callback');
+        self.props.testStateUplift();
+      },
     });
   };
 
@@ -85,4 +118,4 @@ class TopMenu extends React.Component {
   }
 }
 
-export default TopMenu;
+export default connect(mapStateToProps, mapDispatchToProps)(TopMenu);

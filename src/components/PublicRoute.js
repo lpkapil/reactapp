@@ -1,5 +1,5 @@
 import React from 'react';
-import store from '../store';
+import store from '../redux/store';
 import { Route, Redirect } from 'react-router-dom';
 
 class PublicRoute extends React.Component {

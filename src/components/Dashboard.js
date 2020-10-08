@@ -2,7 +2,7 @@ import React from 'react';
 import PageHeaderCommon from '../components/Layout/PageHeaderCommon';
 import { Divider, Tabs, Result } from 'antd';
 import UserListing from './UserListing';
-import store from '../store';
+import store from '../redux/store';
 
 const { TabPane } = Tabs;
 

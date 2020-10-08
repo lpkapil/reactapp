@@ -1,11 +1,10 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import './App.css';
 import { connect } from 'react-redux';
-import store from './store';
-import Header from './components/Layout/Header';
-import Footer from './components/Layout/Footer';
-import Main from './components/Layout/Main';
+import store from '../../redux/store';
+import Header from './Header';
+import Footer from './Footer';
+import Main from './Main';
 
 const mapStateToProps = (state, ownProps) => ({
   // ... computed data from state and optionally ownProps

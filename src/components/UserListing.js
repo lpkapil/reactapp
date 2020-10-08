@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Input, Button, Space, Modal } from 'antd';
 import axios from 'axios';
-import store from '../store';
+import store from '../redux/store';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 

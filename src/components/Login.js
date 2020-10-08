@@ -3,7 +3,7 @@ import { Form, Input, Button, Row, Col, Card, notification } from 'antd';
 import PageHeaderCommon from '../components/Layout/PageHeaderCommon';
 import axios from 'axios';
 import qs from 'qs';
-import store from '../store';
+import store from '../redux/store';
 
 const layout = {
   labelCol: {
