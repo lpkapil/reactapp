@@ -86,7 +86,7 @@ class Register extends React.Component {
       <Row gutter={[16, 16]}>
       <Col span={8}></Col>
       <Col span={8}>
-        <Card style={{ width: 400 }}>
+        <Card style={{ width: 450 }}>
       <Form
       {...layout}
       name="basic"
@@ -107,6 +107,7 @@ class Register extends React.Component {
             message: 'Name is required.'
           },
         ]}
+        hasFeedback
       >
         <Input />
       </Form.Item>
@@ -123,18 +124,44 @@ class Register extends React.Component {
             message: 'Please enter a valid email.'
           }
         ]}
+        hasFeedback
       >
         <Input />
       </Form.Item>
 
       <Form.Item
-        label="Password"
         name="password"
+        label="Password"
         rules={[
           {
             required: true,
-            message: 'Password is required.'
+            message: 'Please input your password!',
           },
+        ]}
+        hasFeedback
+      >
+        <Input.Password />
+      </Form.Item>
+
+      <Form.Item
+        name="password_confirmation"
+        label="Confirm Password"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your password!',
+          },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+
+              return Promise.reject('The two passwords that you entered do not match!');
+            },
+          }),
         ]}
       >
         <Input.Password />

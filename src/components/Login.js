@@ -109,6 +109,7 @@ class Login extends React.Component {
                   message: 'Please enter a valid email.'
                 }
               ]}
+              hasFeedback
             >
               <Input />
             </Form.Item>
@@ -122,6 +123,7 @@ class Login extends React.Component {
                   message: 'Password is required.'
                 },
               ]}
+              hasFeedback
             >
               <Input.Password />
             </Form.Item>

@@ -68,7 +68,7 @@ a {
 }
 
 .ant-menu {
-    background: none;
+    background: none !important;
 }
 
 .site-page-header {
