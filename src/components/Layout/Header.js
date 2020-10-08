@@ -15,7 +15,7 @@ class Header extends React.Component {
     return (
       <div className="Header">
           <Logo appName={this.props.appName} />
-          <TopMenu testStateUplift={this.stateUpLiftHandler}/>
+          <TopMenu testStateUplift={this.stateUpLiftHandler} />
       </div>
     )
   }

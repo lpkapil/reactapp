@@ -5,10 +5,14 @@
  * type of function you would pass to Array. 
  */
 
+
+import enUS from 'antd/es/locale/en_US';
+
 const initialState = {
     login: localStorage.getItem('login') ?? false,
     token: localStorage.getItem('token') ?? null,
     user: localStorage.getItem('user') ?? null,
+    lang: enUS
 }
 
 const reducer = (state = initialState, action) => {
@@ -27,6 +31,11 @@ const reducer = (state = initialState, action) => {
                 token: action.token,
                 user: action.user
             }
+            case 'CHANGE_LOCALE':
+                return {
+                    ...state,
+                    lang: action.value
+                }    
       default:
         return state
     }

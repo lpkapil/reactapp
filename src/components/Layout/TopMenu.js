@@ -1,9 +1,11 @@
 import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Modal, Button } from 'antd';
-import { HomeOutlined, LoginOutlined, ExclamationCircleOutlined, DashboardOutlined, UserOutlined } from '@ant-design/icons';
+import { Menu, Modal, Button, Radio } from 'antd';
+import { GlobalOutlined, HomeOutlined, LoginOutlined, ExclamationCircleOutlined, DashboardOutlined, UserOutlined } from '@ant-design/icons';
 import store from '../../redux/store';
 import { connect } from 'react-redux';
+import enUS from 'antd/es/locale/en_US';
+import hiIN from 'antd/es/locale/hi_IN';
 
 const { confirm } = Modal;
 const { SubMenu } = Menu;
@@ -72,6 +74,10 @@ class TopMenu extends React.Component {
     });
   };
 
+  changeLocale = e => {
+    const localeValue = e.target.value;
+    store.dispatch({type: 'CHANGE_LOCALE', value: localeValue});
+  };
 
   render() {
 
@@ -84,7 +90,7 @@ class TopMenu extends React.Component {
               <Link to="/dashboard">Dashboard</Link>
             </Menu.Item>
             <SubMenu key="SubMenu" icon={<UserOutlined />} title={this.state.user.name}>
-              <Menu.Item key="logout" icon={<LoginOutlined />}>
+              <Menu.Item key="logout" style={{float: 'left'}} icon={<LoginOutlined />}>
                 <Button type="link" onClick={this.handleLogout}>
                   Logout
                 </Button>
@@ -112,6 +118,16 @@ class TopMenu extends React.Component {
             <Link to="/">Home</Link>
           </Menu.Item>
           { links }
+          <Menu.Item key="language" icon={<GlobalOutlined />}>
+              <Radio.Group value={this.props.storestate.lang} onChange={this.changeLocale}>
+                <Radio.Button key="en" value={enUS}>
+                  English
+                </Radio.Button>
+                <Radio.Button key="in" value={hiIN}>
+                  हिंदी
+                </Radio.Button>
+              </Radio.Group>
+          </Menu.Item>
         </Menu>
       </div>
     )

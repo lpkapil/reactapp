@@ -5,10 +5,13 @@ import store from '../../redux/store';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
+import {
+  ConfigProvider
+} from 'antd';
 
 const mapStateToProps = (state, ownProps) => ({
   // ... computed data from state and optionally ownProps
-  
+  'storestate': state
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -33,9 +36,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header login={this.state.login} appName={this.state.appName} />
-        <Main />
-        <Footer appName={this.state.appName} />
+        <ConfigProvider locale={this.props.storestate.lang}>
+          <Header login={this.state.login} appName={this.state.appName} />
+          <Main />
+          <Footer appName={this.state.appName} />
+        </ConfigProvider>
     </div>
     )
   }
